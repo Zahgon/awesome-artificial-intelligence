@@ -1,0 +1,4 @@
+# Migration scratch files - exclude from language statistics
+*.patch          linguist-generated=true
+truth.md         linguist-generated=true
+instructions.md  linguist-generated=true

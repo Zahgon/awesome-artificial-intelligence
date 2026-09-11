@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Wrapper around the packaged validator so CI and contributor commands stay short.
+# Builds the jar on demand if it is missing.
+#
+set -euo pipefail
+
+REPO="$(cd "$(dirname "$0")/.." && pwd)"
+JAR="$REPO/target/awesome-artificial-intelligence-0.1.0.jar"
+
+if [ ! -f "$JAR" ]; then
+  (cd "$REPO" && mvn -B -q -DskipTests package)
+fi
+
+exec "${JAVA_HOME:+$JAVA_HOME/bin/}java" -jar "$JAR" "$@"
